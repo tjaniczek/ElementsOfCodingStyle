@@ -1,0 +1,946 @@
+<!DOCTYPE html> 
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>The Elements of Coding Style</title> 
+        <meta name="viewport" content="width=device-width"> 
+
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400i,700|Roboto+Mono:300,400" rel="stylesheet">
+        <style>
+            body {
+                background: #f1f1f1 url('paper.png');
+                font-size: 17px;
+                font-family: 'Merriweather', serif;
+                line-height: 1.62em;
+                color: #433;
+                margin-bottom: 10em;
+
+            }
+
+            h1 {
+                font-size: 4em;
+                margin-top: 2.5em;
+                margin-bottom: 0.5em;
+            }
+
+            em {
+              font-weight: 300;
+            }
+
+            h1 span {
+                font-style: italic;
+                font-size: 0.6em;
+                position: relative;
+                top: -0.2em;
+            }
+
+            h1, .subtitle {
+                text-align: center;
+            }
+
+            .subtitle {
+                margin-bottom: 8em;
+                font-size: 1.2em;
+            }
+
+            h2 {
+                font-size: 2.4em;
+                margin-top: 2em;
+            }
+
+            h3 {
+                font-size: 1.8em;
+                margin-top: 2em;
+            }
+
+            body > div {
+                width: 860px;
+                margin: 0 auto;
+
+            }
+
+            body > div > ol {
+                font-size: 2.1em;
+                font-family: 'Merriweather', serif;
+                font-weight: 700;
+            }
+
+            body > div > ol section {
+                font-size: 17px;
+                font-family: 'Merriweather', serif;
+                line-height: 1.62em;
+                font-weight: 300;
+            }
+
+            ul > li {
+                list-style: disc;
+            }
+
+            .subtitle {
+                font-family: 'Merriweather', serif; 
+                font-weight: 700; 
+            }
+
+            code {
+                font-family: 'Roboto Mono', monospace;
+                font-size: 0.9em;
+                line-height: 1.4em;
+            }
+ 
+            
+            body {
+                counter-reset: sec;
+                counter-reset: subsection;
+            }
+
+            section {
+                counter-increment: sec; 
+                counter-reset: subsection;
+            }
+
+            h2::before {
+                content: counter(sec) ". ";
+                width: 62px;
+                display: inline-block; 
+                margin-left: -66px;
+                padding-right: 4px;
+                text-align: right;
+            }
+
+            h3::before { 
+                counter-increment: subsection;
+                content: counter(sec) "." counter(subsection) ". ";
+                font-size: 0.9em;
+                font-style: italic;
+            }
+
+            code {
+                border-radius: 8px;
+            }
+
+            .bad {
+                border-left: 14px solid #982828;
+            }
+
+            .decent {
+                border-left: 14px solid #2aaf72;
+            }
+
+            p > code, ul > li > code {
+                background: #fafafa;
+                border: 1px solid #f4d6d6;
+                padding: 2px 7px 4px;
+                color: #555;
+                font-weight: 400; 
+            }
+
+            acronym {
+                text-decoration: none;
+                border-bottom: 1px dotted black;
+                cursor: help;
+            }
+
+            pre + pre {
+                margin-top: -60px;
+            }
+            .grid {
+                display: grid;
+                grid-gap: 10px;
+            }
+
+            .grid.wide {
+                margin-left: -50px;
+                margin-right: -50px;
+            }
+
+            .grid pre {
+                grid-column: 1 / 2; 
+                margin-top: 0;
+            }
+            .grid pre + pre {
+                grid-column: 2 / 2; 
+                margin-top: 0;
+            }
+            
+            .hljs {
+              display: block;
+              overflow-x: auto;
+              padding: 0.5em;
+              background: #422f2f;
+              color: #f4efef;
+            }
+
+            .hljs-name,
+            .hljs-strong {
+              font-weight: bold;
+            }
+
+            .hljs-code,
+            .hljs-emphasis {
+              font-style: italic;
+            }
+
+            .hljs-tag {
+              color: #62c8f3;
+            }
+
+            .hljs-variable,
+            .hljs-template-variable,
+            .hljs-selector-id,
+            .hljs-selector-class {
+              color: #ade5fc;
+            }
+
+            .hljs-string,
+            .hljs-bullet {
+              color: #a2fca2;
+            }
+
+            .hljs-type,
+            .hljs-title,
+            .hljs-section,
+            .hljs-attribute,
+            .hljs-quote,
+            .hljs-built_in,
+            .hljs-builtin-name {
+              color: #ffa;
+            }
+
+            .hljs-number,
+            .hljs-symbol,
+            .hljs-bullet {
+              color: #d36363;
+            }
+
+            .hljs-keyword,
+            .hljs-selector-tag,
+            .hljs-literal {
+              color: #d25a79;
+            }
+
+            .hljs-comment,
+            .hljs-deletion,
+            .hljs-code {
+              color: #888;
+            }
+
+            .hljs-regexp,
+            .hljs-link {
+              color: #c6b4f0;
+            }
+
+            .hljs-meta {
+              color: #fc9b9b;
+            }
+
+            .hljs-deletion {
+              background-color: #fc9b9b;
+              color: #333;
+            }
+
+            .hljs-addition {
+              background-color: #a2fca2;
+              color: #333;
+            }
+
+            .hljs a {
+              color: inherit;
+            }
+
+            .hljs a:focus,
+            .hljs a:hover {
+              color: inherit;
+              text-decoration: underline;
+            }
+
+            .hljs-function {
+              color: #d8ec8d;
+            }
+            .hljs-params {
+              color: #67a267;
+            }
+        </style> 
+    </head>
+    <body> 
+    <h1>The Elements <span>of</span> Coding Style</h1>
+    <div class="subtitle">JavaScript Edition</div>
+
+    <div> 
+        <section>
+            <h2>Preface</h2>
+            <p>As surprising as it may seem, writing code is just a small chunk of software development process. As you gain experience as a developer, you realise most of your time is not spent writing new code. You'll find yourself reading the code far more often than writing it. </p>
+
+            <p>Of course, you program new apps and features - but afterwards, there's debugging stage when you have to read the code in order to fix it. When you develop an app in a team you have to read and understand your teammates' code. Then there's <acronym title="Don't repeat yourself">DRY</acronym> principle, code reviews, refactoring, support for legacy systems and finally professional development - all require reading code. Since the majority of development time is spent reading, code readability has a tremendous impact on time, costs and quality of any software project. </p>
+
+            <p>I believe that producing readable code is a skill that every developer should actively work on. Most of the today's projects require multiple people working together and it is long-established that teamwork is more import than individual skill. In this short article, I'll present established practices and some of my own observations on writing eloquent code. Although it's focused on JavaScript, developers from other ecosystems may also find some points useful. I'm open for debate so please expect this article to evolve over time. </p>
+
+            <p>ES6 JavaScript had been used in code examples.</p> 
+        </section> 
+        <section>
+            <h2>Reader first</h2>
+            <p>When you write your code always think about the future reader. Practice mentality of looking at the code from the perspective of someone who sees it for the very first time. Is this easy to understand? May this be misinterpreted? Is this easy to follow? Your goal is to produce code that will be understood even by someone who doesn't pay much intention while reading.</p> 
+            <p>Like a manual - clear instructions, not many ways to misinterpret developer's intentions. </p>
+        </section> 
+        <section>
+            <h2>Language</h2>
+            <p>It's hard to be eloquent if you barely know the language. As it is with spoken tongues learning basic vocabulary may be enough to communicate your ideas - but it requires more focus from the listener which may be wearing in the long run. Therefore the first step towards writing quality code is learning the complete language. Complete means not only the easy parts but also the complicated parts, tricky behaviours and common patterns.</p>
+
+            <p>As an example: <code>Array.reduce()</code> seems quite complicated first time you read about it. If you decide to skip this part you will find yourself numerous times reading the code you don't understand. You will also write code like this:</p>
+<pre>
+    <code class="javascript bad">
+    const numbers = [1, 2, 3, 4]
+    let sum = 0
+
+    for (let i = 0; i &lt; numbers.length; i++) {
+      sum += numbers[i]
+    }
+    </code>
+</pre>
+            <p>...when you could simply write:</p>
+<pre>
+    <code class="javascript decent">
+    const numbers = [1, 2, 3, 4]
+    const sum = numbers.reduce((acc, number) => (acc + number), 0)
+    </code>
+</pre>
+            <p>Coming back to this code months later, in order to have a clear understanding of the first example you have to:</p>
+            <ul>
+                <li>double check what i means in this context, </li>
+                <li>make a couple of loops in your head to make sure the code does what you think it does,</li>
+                <li>assure yourself you've not missed anything - in this kind of code you can't be sure at first sight if summing the numbers was <strong>the only</strong> intention of the developer.</li>
+            </ul> 
+
+            <p>The second example is shorter, easier to understand (if you know how <code>Array.reduce()</code> works that is), but most importantly - it describes the intent of the developer. Take the array and reduce it to a single value. Nothing more, nothing less.</p>
+
+            <p>I've seen code utilising two for loops and one while loop, where single <code>Array.map()</code> was sufficient. Learning the language may save you hours in both writing and reading the code. It will also make your job much easier.</p>
+
+
+            <h3>Standard</h3>
+            Different people write code in different ways that's why it's important to use common styling standard. If you did not adopt one yet, for JavaScript use: <a href="https://standardjs.com/" target="_blank">JavaScript Standard Style</a>. Find a way to automatically check your code - is it in your <acronym title="Integrated development environment">IDE</acronym>, bundling or <acronym title="Continuous integration">CI</acronym>. Of course, if you have a large codebase using different style (eslint, eshint) you should keep it this way.
+
+            <h3>Spoken (written) tongue </h3>
+            <p>English may not be most common language in the world, but it provides many advantages:</p>
+            <ul>
+                <li>it's easy to learn and use</li>
+                <li>it's most popular language in tech industry</li>
+                <li>Latin alphabet is most commonly used around the world</li>
+            </ul>
+
+            <p>Use English to name your variables, functions <strong>and</strong> write your comments. Eventually, people from around the world may join your project and it would be rude to ask them all learn Norsk.</p>
+
+        </section>
+        <section>
+            <h2>Readability</h2>
+            <p>When you write your code you have to keep every variable and every function you use in your short-term memory. That's why you understand what <code>val.gc = oppr[0]++</code> does. But after a week this knowledge is long gone. At this point, no one in the world knows what this code does, and if so happens that you have to debug it - you will have to <strong>learn</strong> this code. You will have to follow it line by line often for hundreds of lines to find the one you're interested in. </p>
+
+            <h3>Use variable names for readability</h3>
+
+            <p>Consider this example. Do you know straight away what this code does?</p>
+
+<pre>
+    <code class="javascript bad">
+    this.ctrlBar.el().insertBefore(this.ctrlBar.fullscreenToggle.el())
+    </code>
+</pre>
+
+            <p>And how about these 3 lines ?</p>
+
+<pre>
+    <code class="javascript decent">
+    const bar = this.controlBar.element()
+    const toggle = this.controlBar.fullscreenToggle.element()
+     
+    bar.insertBefore(toggle)
+    </code>
+</pre>
+
+            <p>Don't hassle to create tonnes of variables just to make code easier to read. If you'd come across code from the first example you would have to stop and decipher all those brackets and dots. In the second example, I added some extra lines but you should be able to understand my intent almost like if you'd be reading it in plain English: insert bar before toggle.</p>
+            <p>With time you'll learn to skip these variable definitions and read only the part responsible for app's logic. If you'll ever need to check what this toggle actually is - you can still look for its definition couple of lines above. But this knowledge is not forced on you if you're not interested like in the previous example.</p>
+
+            <h3>One line per statement</h3>
+            <p>It's easy to write a line of code like this:</p>
+
+<pre>
+    <code class="javascript bad">
+    const topValue = ($(window).scrollTop() / 3) - Math.abs(event.data.offset)
+    </code>
+</pre>
+
+            <p>Sometimes situation requires a bit of trial and error or fiddling with values in order to find something that suits our needs. It mostly happens working on graphics, animations or other dynamic actions on the page. Whenever you are finally happy with the result consider refactoring the code for better readability. Above example:</p>
+            <ul>
+                <li>checks how far the user is from the top of the page</li>
+                <li>checks how far the user recently scrolled</li>
+                <li>finds the difference between these two</li>
+                <li>adds in some arbitrary number for good measure</li>
+            </ul>
+
+            <p>This is too complex and should be broken into smaller, individual statements:</p>
+
+<pre>
+    <code class="javascript decent">
+    const position = $(window).scrollTop()
+    const desiredPosition = position / 3
+    const jump = Math.abs(event.data.offset)
+    
+    const topValue = desiredPosition - jump
+    </code>
+</pre>
+
+            <p>Desirably each line states one fact, describes one operation or tests one condition. Sometimes you may place two coupled operations on a single line if that improves readability. In the example above, getting an absolute value from the offset and assigning it to a variable are technically two operations - but splitting it into multiple lines wouldn't bring any benefits to clarity. Definitely, avoid three and more operations in a single line.</p>
+
+            <h3>Preparation and execution</h3>
+            <p>Consider these two examples:</p>
+<pre>
+    <code class="javascript bad">
+    const truncateText = (text, size) => {
+      const fragment = text.substr(0, size).trim()
+    
+      if (size !== text.length &amp;&amp; fragment.charAt(fragment.length - 1) !== '.') {
+        return fragment + '&amp;hellip;'
+      }
+    
+      return fragment
+    }
+    </code>
+</pre> 
+<pre>
+    <code class="javascript decent">
+    const truncateText = (text, size) => {
+      const isTruncated = size !== text.length
+      const fragment = text.substr(0, size).trim()
+      const lastCharacter = fragment.charAt(fragment.length - 1)
+      const endsWithPeriod = lastCharacter === '.'
+      
+      if (isTruncated &amp;&amp; !endsWithPeriod) {
+        return fragment + '&amp;hellip;'
+      }
+  
+      return fragment
+    }
+    </code>
+</pre>
+
+            <p>The heart of this function is a simple <code>if</code> statement. In the second example, there is a clear distinction between preparation and execution. First, I prepared the variables I need to describe what the function intends to do, then I executed logic. This way function is easy to understand and when you need more details - they are available for you. Function definition in plain English: <em>add the ellipsis only when text got truncated and doesn't end with period</em>.</p>
+
+            <p>In the former example, everything happens on the fly. The function is surely shorter but you'll spend much more time trying to understand it.</p>
+
+            <h3>Short functions</h3>
+            <p>Keep your functions short and single-purposed. As with variables, consider creating functions for readability purposes. In the example from the previous paragraph I would go a bit further and write the code this way:</p>
+
+<pre>
+    <code class="javascript decent">
+    const endsWithPeriod = (text) => {
+      const lastCharacter = text.charAt(text.length - 1)
+      return lastCharacter === '.'
+    }
+
+    const styleFragment = (fragment) => {
+      const needsEllipsis = !endsWithPeriod(fragment)
+
+      if (needsEllipsis) {
+        return fragment + '&amp;hellip;'
+      }
+      return fragment
+    }
+
+    const truncateText = (text, size) => {
+      const isTruncated = size !== text.length
+      const fragment = text.substr(0, size).trim()
+
+      if (isTruncated) {
+        return styleFragment(fragment)
+      }
+      return fragment
+    }
+    </code>
+</pre>
+
+            <p>This code will probably seem a bit off for you at first. This code is much longer than the first example and it takes bit more effort to write. But it's much easier to debug, much easier to build upon and much less prone to errors. The extra effort you put into writing this code will benefit you every single time you have to go back to it.</p>
+            <p>Every function has a clear single purpose, so whenever you have to rework one of the behaviours you can focus on this single behaviour alone. If stylising the truncated fragments requires more features you can add them in styliseFragment function without worrying out how the whole truncation works in the first place.</p>
+
+
+            <h3>Functions hierarchy</h3>
+            <p>As you break functions into smaller and smaller bits you have to remember to keep them in some sort of hierarchy. Higher order functions should be kept together and provide a general picture of what given file/class/controller want's to achieve. They should break into smaller functions that describe on how given operation is being achieved. These also should break into smaller ones for trivial tasks.</p>
+            <p>Never mix trivial and higher order operations together.</p>
+
+<pre>
+    <code class="javascript decent"> 
+    class Modal {
+      constructor (refs) {
+        this.elements = this.getElements(refs)
+
+        this.prepareModal()
+        this.openModal(this.elements[0])
+      }
+
+      prepareModal () {
+        this.attachEvents()
+        this.updateStyles()
+      } 
+
+    // ...
+    </code>
+</pre>
+
+            <p>The <code>constructor</code> of the class above hardly does any work but it provides a clear and short explanation of what it does - it needs a bit of bootstrapping before showing the first element passed to it. Also, middle-man function <code>prepareModal</code> doesn't do anything by itself - only describes what steps are needed to prepare this modal.</p> 
+
+<pre>
+    <code class="javascript decent">
+    componentWillReceiveProps(nextProps) {
+      this.setFilters(nextProps)
+      this.setActiveOptions(nextProps)
+      this.setReady()
+    }
+    </code>
+</pre>
+
+            <p><code>componentWillReceiveProps</code> is an important method in React. As a fundamental part of the framework - it's almost guaranteed a developer trying to understand the component will look there first. That's a clear hint that this method should be considered higher order - only the bigger picture is introduced here.</p>
+
+            <h3>Simple if statements</h3>
+            <p><code>if</code> statements are one of the most basic features of programming. At the same time, they are the most complicated part of any application. <code>if</code> statements create crossroads where the flow of the app may take multiple paths. The more <code>if</code> statements the more paths you have to control. To efficiently debug an algorithm you need to know all different ways data may be manipulated. That's why it's so important to treat <code>if</code> statements with extra care.</p>
+
+            <p>Other developers should be able to follow the flow of your app just by briefly scanning it. Never use more than two conditions in one <code>if</code> statement - create a function instead. If there's one condition but it's a complicated one - also use a function to explain it.</p>
+
+            <p>Examples:</p> 
+<pre>
+    <code class="javascript bad">   
+    if (isNumber(value) &amp;&amp; value > 5 &amp;&amp; value &lt; 10) {
+      // some code
+    }
+    </code>
+</pre> 
+<pre>
+    <code class="javascript decent">
+    const isInRange = (value, min, max) => {
+      if (!isNumber(value)) {
+        return false
+      } 
+      return value > min &amp;&amp; value &lt; max
+    }
+    
+
+    if (isInRange(value, 5, 10)) {
+      // some code
+    }
+    </code>
+</pre> 
+
+            <p>If you have to meet two conditions at once try to reflect that in the <code>if</code> statement itself.</p>
+
+<pre>
+    <code class="javascript bad">
+    if ($('div').hasClass('selected') &amp;&amp; $('div').attr('hover') == true) {
+      // some code
+    }
+    </code>
+</pre>
+
+<pre>
+    <code class="javascript decent">
+    const isSelected = element => $(element).hasClass('selected')
+    const isHovered = element => $(element).attr('hover')
+    
+    if (isSelected(element) &amp;&amp; isHovered(element)) {
+      // some code
+    }
+    </code>
+</pre>
+
+            <h3>No nested blocks &amp; loops</h3>
+            <p>Do not ever nest <code>for</code> loops, <code>while</code> loops, <code>map</code>-s, <code>filter</code>-s, <code>switch</code>-es or <code>if</code> statements - in any configuration of these. It happens often because it's most natural way of writing code. Unfortunately every time someone else will have to go through code like that - he'll have to go line by line multiple times to digest all the operations happening at the same time. Use multiple functions to divide and conquer. </p>
+
+<pre>
+    <code class="javascript bad">
+    elements = elements.each(function(element){
+        element.attributes.filter(function(attribute){
+            if (isNumber(attribute) &amp;&amp; attribute > 0) {
+                return true
+            }
+            return false
+        });
+    });
+    </code>
+</pre> 
+<pre>
+    <code class="javascript decent">
+    const isPositive = attribute => (
+      isNumber(attribute) &amp;&amp; attribute > 0
+    )
+
+    const keepPositiveAttributes = element => (
+      element.attributes.filter(isPositive)
+    )
+     
+    elements = elements.each(keepPositiveAttributes)
+    </code>
+</pre>
+ 
+            <p><strong>Notice naming</strong>: <code>keepPositive</code> wouldn't work in this example as we don't want to keep only positive elements - we want to keep all elements but only with positive attributes along with them. The operation is a bit tricky so we absolutely need to use a longer variable name.</p>
+
+            <h3>Short blocks</h3>
+            <p>All block elements (including: <code>if</code>, <code>for</code>, <code>when</code> &amp; functions) should have no more than 8 lines of code. Otherwise, it's hard to answer some questions:</p>
+
+            <ul>
+                <li>am I still in the block or not?</li>
+                <li>what's the scope of this variable? </li>
+                <li>what's <code>this</code> ?</li>
+                <li>if the block was closed here then where am I now? </li>
+                <li>is that <code>}</code> needed here at all?</li>
+            </ul>
+
+            <p>Long blocks make code really hard to read and debug. Especially with long if blocks you may find yourself thinking if the statements you are looking at are still part of the conditional route or not.</p> 
+        </section>
+        <section>
+            <h2>Eloquent naming</h2>
+            <p><em>There are only two hard things in Computer Science: cache invalidation and naming things.</em> When you code, you know what any given variable is intended to - why it is needed and what value it is supposed to keep. You don't really need descriptive variable names that much. Use variables for future reader's benefit. Consider these two examples:</p>
+
+<div class="grid">
+<pre>
+    <code class="javascript bad">
+    if (checkAttr(img)) {
+       panEl.active = img
+    } 
+    </code>
+</pre> 
+<pre>
+    <code class="javascript decent">
+    if (imageIsSelected(image)) {
+       panel.visibleItem = image
+    }
+    </code>
+</pre>
+</div>
+            <p>Notice the mind shift between these examples. In order for someone to understand this <code>if</code> statement - he needs to understand the condition. The condition relays on an image being selected or not. The details of implementation (checking for some attributes) are not relevant at this moment. The same thing applies on line 2. Attribute <code>active</code> doesn't tell much. The panel is active, but what does that really mean? How does that affect other parts of the app? What happens when I change it? Just by reading the second snippet you probably already have answers to all those questions.</p>
+
+
+
+            <h3>Use full words</h3>
+            <p>You may understand what <code>this.ctBar.pan()</code> is in the heat of the moment, but when you'll come back to this code in 6 months time you'll appreciate using <code>this.controlBar.panel()</code> as your names. </p>
+
+            <p>The only exceptions are the most commonly used abbreverations:</p>
+            <ul>
+                <li><code>i</code> for index in iterators </li>
+                <li><code>val</code> for value in iterators</li>
+                <li><code>acc</code> for accumulator in Array.reduce()</li>
+                <li><code>refs</code> for DOM references </li>
+                <li><code>el</code> for DOM element</li>
+                <li><code>obj</code> for not-specified object </li>
+                <li><code>attrs</code> for attributes </li>
+            </ul>
+            <p>&hellip;and only if the function you use it in is <strong>really</strong> easy to understand otherwise. For example:</p>
+
+<pre>
+    <code class="javascript bad">
+    let indexes = [1, 2, 3, 4]
+    let isCorrect = indexes.reduce((acc, val, i) => (acc &amp;&amp; val > i), true)
+    </code>
+</pre>
+
+            <p>As you can see above, even one-line function may be hard to understand. It could be beneficial to write more verbose:</p>
+
+<pre>
+    <code class="javascript decent">
+    let indexes = [1, 2, 3, 4]
+    let isCorrect = indexes.reduce((previous, current, index) => {
+        let currentIsCorrect = current > index
+        return previous &amp;&amp; currentIsCorrect
+    }, true);
+    </code>
+</pre>
+
+            <p>&hellip;and it's now more clear that for some reason <code>isCorrect</code> means that every value in the array is bigger than its index.</p>
+
+            <p>Also, you should avoid abbreviations in functions with extended preparation. Example:</p>
+
+<div class="grid wide">    
+<pre>
+    <code class="javascript bad">
+  const getHex = (ref) => {
+    const s = `[${ref}]`
+    const el = car.find(s)
+    const attr = el.getAttribute('color')
+
+    return hex(attr)
+  }
+    </code>
+</pre> 
+<pre>
+    <code class="javascript decent">
+  const getHexColor = (reference) {
+    const selector = `[${reference}]`
+    const element = carousel.find(selector)
+    const color = element.getAttribute('color')
+    
+    return convertToHex(color)
+  }
+    </code>
+</pre>
+</div>
+
+            <h3>Be concise</h3>
+            <p>Try to use as short variable names as possible. Both <code>camelCase</code> and <code>snake_case</code> are hard to read in sentences, therefore, you must keep your names short. Single words may not always be enough to describe your state, but try to keep the use of two- and three-word names to a minimum. Never use more than three words in a single variable name. Use shorter variable names even if it means being a bit too generic. It's always easier to dig into specifics when you understand the logic than not understand anything in the first place.</p>
+
+            <p>Example of code where author tried to be extremely precise:</p>
+
+<pre>
+    <code class="javascript bad">
+    function getTruncatedTextStartPosition(firstMatchPosition, firstMatchLength, text) {
+        const lengthOfStringToTheRightOfTheMatch = text.length - 
+          (firstMatchPosition + firstMatchLength)
+    
+        if (lengthOfStringToTheRightOfTheMatch &lt; Search.DEFAULT_PADDING) {
+          return firstMatchPosition - (Search.DEFAULT_PADDING + 
+            (Search.DEFAULT_PADDING - lengthOfStringToTheRightOfTheMatch))
+        }
+    
+        return firstMatchPosition - Search.DEFAULT_PADDING
+    }
+    </code>
+</pre>
+
+<p>After refactoring could look like: </p>
+<pre>
+    <code class="javascript decent">
+    function getFragmentStart(stringStart, stringLenght, text) {
+      const padding = Search.DEFAULT_PADDING
+      const start = stringStart - padding
+      const end = stringStart + stringLenght
+      const reminder = text.length - end
+  
+      if (reminder &lt; padding) {
+        const offset = padding - reminder
+        return start + offset
+      }
+  
+      return start
+    }
+    </code>
+</pre>
+
+            <p>Logic is sill a bit hard to follow and doesn't make much sense without the context. But the reader is able to quickly scan the code and decide if this is something he's supposed to focus on. In this example, I even decided to give a new name to a global constant - as it makes it easier to read. I also used preparation/execution pattern mentioned earlier.</p>
+
+
+        </section>
+        <section>
+            <h2>Comments</h2>
+            <p>As you use variables and function names to explain your code, the number of comments will drastically decrease. In the ideal scenario, there would be no need for comments at all. So that everyone would be able to read through the app in one go - without any interruptions. Unfortunately, in the real world, some parts of code require some extra explanation. Is it because of a quirk of the system, some complicated operation or code usually described as: <em>magic</em>.</p>
+
+<pre>
+    <code class="javascript decent">
+    // All usernames saved in the database 
+    // contain account name, so we have to remove it.
+    username = username.substr(0, username.lastIndexOf(account))
+    </code>
+</pre>
+
+            <p>These cases are extremely rare. Try not to use comments, definately do not comment obvious things: </p>
+
+<pre>
+    <code class="javascript bad">
+    // Variable for indicating first carousel change when it opens
+    let firstCarouselChange = false
+    </code>
+</pre>
+
+            <p>You could write instead:</p>
+<pre>
+  <code class="javascript decent">
+    let carouselUsed = false;
+  </code>
+</pre>
+
+        </section>
+        <section>
+            <h2>Functions</h2>
+            <p>Aside from functions used for stylistic purposes, most functions simply compute values. It means they take some values in, change it slightly and pass a new value back. Functions should never change any value from outside of its body. For <acronym title="Test driven development">TDD</acronym>, preventing bugs and improving code readability it's important to keep it this way as much as possible. Pass arguments it, return values out. Take a look at following code:</p>
+<pre>
+    <code class="javascript bad">
+    let sentence = 'small letter and no full stop'
+    fixStyling()
+     
+    function fixStyling() {
+        sentence = sententce.split(0,1).toUpperCase() + sentence.split(1) + '.'
+    }
+    </code>
+</pre> 
+<pre>
+    <code class="javascript decent">
+    let sentence = 'small letter and no full stop'
+    sentence = fixStyling(sentence)
+     
+    function fixStyling(sentence) {
+        return sententce.split(0,1).toUpperCase() + sentence.split(1) + '.'
+    }
+    </code>
+</pre>
+
+            <p>In first example function changes variable outside its scope. This is not only hard to follow, but also produces a lot of bugs. In second example function takes some value, changes only data it took, then returns the new value. It's much easier to reason as every function acts in its own sandbox.</p>
+
+            <p>Of course, other points from this article could be applied to refactor it even more:</p>
+
+<pre>
+    <code class="javascript decent">
+    const fixStyling = (sentence) => {
+        const firstLetter = sententce.split(0, 1)
+        const rest = sententce.split(1)
+    
+        return firstLetter.toUpperCase() + rest + '.'
+    }
+    
+    let sentence = 'small letter and no full stop'
+    sentence = fixStyling(sentence)
+    </code>
+</pre>
+        <p>Once again person working with this code may can variables' definitions and read function logic resembling English: <em>Take first letter in uppercase, then rest of the sentence and add comma at the end.</em>
+        </section>
+        <section>
+            <h2>Regex</h2>
+            <p>Regexes are not as scary as many people think. They are a great tool, and when treated properly they can be easily accessible to anyone in the team. The single regex should always get its own function. If you wrote the regex yourself, try to explain how it works flag by flag - for future debugging. In the end, that may be the last time someone understands how it works. If you googled it - add a link to the page. Be generous with your comments, add explanation and examples.</p>
+            <p>An example of code that no one will ever touch in fear of breaking it:</p>
+
+<pre>
+    <code class="javascript bad">
+    text = text.replace(/\[([A-Z]{3,6})([0-9]{5,6})\]:?(LINK)?/gi), convertToLinks)
+    </code>
+</pre>
+
+            <p>Should look like this:</p>
+
+<pre>
+    <code class="javascript decent">
+    const findCodesRegex = () => {
+        // Selects all occurences of special codes in text 
+        // i.e. [FILE02966] or [IMG00066]:LINK
+        // /
+        //    \[ - opening bracket
+        //    ([A-Z]{3,6}) - group 0: code (3 to 6 letters)
+        //    ([0-9]{5,6}) - group 1: serial number (5 to 6 numbers)
+        //    \] - closing bracket
+        //    :?(LINK)? - group 2: optional link parameter
+        // /gi - global and case insensitive
+     
+        return /\[([A-Z]{3,6})([0-9]{5,6})\]:?(LINK)?/gi
+    }
+    
+    text = text.replace(findCodesRegex(), convertToLinks)
+    </code>
+</pre>
+        </section>
+
+        <section>
+            <h2>Tips</h2>
+            <p>Final operation is calculated before function returns value:</p>
+<div class="grid">
+<pre>
+    <code class="javascript bad">
+  const makeStars = (quantity) => {
+    const elements = new Array(quantity + 1)
+    const stars = elements.join('*')
+
+    return stars
+  }
+    </code>
+</pre>
+<pre>
+    <code class="javascript decent">
+  const makeStars = (quantity) => {
+    const elements = new Array(quantity + 1) 
+
+    return elements.join('*')
+  }
+    </code>
+</pre>
+</div>
+
+              <p>You don't need <code>else</code> when <code>if</code> block ends with <code>return</code>:</p>
+<div class="grid">
+<pre>
+    <code class="javascript bad">
+  const findLonger = (first, second) => {
+    if (first.length &gt; second.length) {
+      return first
+    } else {
+      return second
+    }
+  }
+    </code>
+</pre>
+<pre>
+    <code class="javascript decent">
+  const findLonger = (first, second) => {
+    if (first.length &gt; second.length) {
+      return first
+    }
+    return second
+  }
+    </code>
+</pre> 
+</div>
+            <p>Use conditional operator to conditionally return a value. From the previous example:</p>
+<pre>
+    <code class="javascript decent">
+  const findLonger = (first, second) => {
+    const firstIsLonger = first.length &gt; second.length
+
+    return firstIsLonger ? first : second
+  }
+    </code>
+</pre> 
+
+            <p>Be explicit when casting to other types. <code>!!</code> trick is neat but it's easy to miss and may confuse less experienced coders:</p> 
+<div class="grid">
+<pre>
+    <code class="javascript bad">
+  let value = 3
+  let textValue = value + ''
+  let condition = !!textValue
+    </code>
+</pre>
+<pre>
+    <code class="javascript decent">
+  let value = 3
+  let textValue = String(value)
+  let condition = Boolean(textValue)
+    </code>
+</pre>
+</div> 
+            <p>Never mix logical operators in a single line. Divide them into variables:</p> 
+<pre>
+    <code class="javascript bad">
+  const checkHusband = (tall, muscular, handsome, rich) => {
+    return tall &amp;&amp; ((muscular &amp;&amp; handsome) || rich)
+  }
+    </code>
+</pre>
+<pre>
+    <code class="javascript decent">
+  const checkHusband = (tall, muscular, handsome, rich) => {
+    const goodLooking = muscular &amp;&amp; handsome
+    const prospective = goodLooking || rich
+
+    return tall &amp;&amp; prospective
+  }
+    </code>
+</pre>
+        </section>
+        <section>
+            <h2>Afterword</h2>
+            <p>This style of coding isn't natural to anyone. You'll probably make mistakes in the process. I write ugly code quite often - but at the same time, I'm actively trying to improve. Keep practising. Keep attention to details. If you're happy with how your code works - refactor it for better readability. If you debug some code and you had a hard time understanding it at first - refactor it for next occasion. If you work in a team - ask someone for code review. Step by step, function by function your code will become better. Have fun!</p>
+        </section> 
+    </div>
+    <script src="highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>
+
+<!-- 
+            <p></p> 
+<pre>
+    <code class="javascript bad">
+    </code>
+</pre>
+<pre>
+    <code class="javascript decent">
+    </code>
+</pre>
+-->
